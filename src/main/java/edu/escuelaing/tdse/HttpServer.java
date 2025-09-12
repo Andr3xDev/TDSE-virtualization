@@ -7,23 +7,23 @@ import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import edu.escuelaing.tdse.config.FrameWorkSetting;
+import edu.escuelaing.tdse.config.FrameworkSettings;
 
 public class HttpServer {
 
     private static int PORT = 35000;
     private boolean running = true;
     private ServerSocket serverSocket;
-    private static String ruta = "target/classes/edu/escuelaing/arep/resources";
+    private static String ruta = "target/classes/static";
     private ExecutorService threadPool;
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) throws IOException, URISyntaxException, ClassNotFoundException {
         HttpServer server = new HttpServer();
         server.settingServer();
         server.startServer();
     }
 
-    public void startServer() throws IOException, URISyntaxException {
+    public void startServer() throws IOException, URISyntaxException, ClassNotFoundException {
         try {
             threadPool = Executors.newFixedThreadPool(10);
             serverSocket = new ServerSocket(PORT);
@@ -48,7 +48,7 @@ public class HttpServer {
 
         while (running) {
             try {
-                FrameWorkSetting.loadComponents();
+                FrameworkSettings.loadComponents();
                 Socket clientSocket = serverSocket.accept();
                 threadPool.submit(new HttpRequestHandler(clientSocket, ruta));
             } catch (IOException e) {

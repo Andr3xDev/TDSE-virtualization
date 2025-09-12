@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import edu.escuelaing.tdse.anotations.RequestParam;
-import edu.escuelaing.tdse.config.FrameWorkSetting;
+import edu.escuelaing.tdse.config.FrameworkSettings;
 
 public class HttpRequestHandler implements Runnable {
 
@@ -89,10 +89,10 @@ public class HttpRequestHandler implements Runnable {
         String code = "404";
         String outputLine = " ";
         if (method.equals("GET")) {
-            service = FrameWorkSetting.getGetService(endpoint);
+            service = FrameworkSettings.getGetService(endpoint);
             code = "200";
         } else if (method.equals("POST")) {
-            service = FrameWorkSetting.getPostService(endpoint);
+            service = FrameworkSettings.getPostService(endpoint);
             code = "201";
         }
         if (service != null) {
