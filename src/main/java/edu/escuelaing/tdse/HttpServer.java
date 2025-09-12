@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import edu.escuelaing.tdse.config.FrameWorkSetting;
 
 public class HttpServer {
 
@@ -49,7 +50,7 @@ public class HttpServer {
             try {
                 FrameWorkSetting.loadComponents();
                 Socket clientSocket = serverSocket.accept();
-                threadPool.submit(new HttpRequestHandlerImpl(clientSocket, ruta));
+                threadPool.submit(new HttpRequestHandler(clientSocket, ruta));
             } catch (IOException e) {
                 if (!running) {
                     System.out.println("Server stopped.");

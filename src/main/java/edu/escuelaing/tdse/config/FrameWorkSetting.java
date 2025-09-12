@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import edu.escuelaing.tdse.anotations.GetMapping;
+import edu.escuelaing.tdse.anotations.PostMapping;
+import edu.escuelaing.tdse.anotations.RestController;
 
 public class FrameWorkSetting {
 
