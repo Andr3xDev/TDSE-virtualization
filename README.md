@@ -121,3 +121,101 @@ Manual acceptance tests were performed by requesting different resources to conf
 There are a suite of integration tests validates server reliability by booting a live instance and sending real HTTP requests. These tests confirm that both static and API endpoints return the expected status codes, headers, and content, ensuring correct end-to-end behavior.
 
 ![tests](docs/test.png)
+
+</br>
+
+
+## Docker & AWS Deploy
+
+### Docker 
+
+Run the following command to create the image with our respective configuration:
+
+```bash
+docker build --tag httpserver .
+```
+
+Once the process is complete, we can view the created images using the `docker ps` command or from Docker Desktop.
+
+![Docker ls](docs/dls.png)
+
+Run the following command to create the container:
+
+```bash
+docker run -d -p 34000:6000 --name httpservercontainer httpserver
+```
+
+![Container created](docs/create.png)
+
+Run the `docker-compose up -d` command after configuring the container network in the `docker-compose.yml` file. This will automatically create the container.
+
+![Docker Compose](docs/compose.png)  
+
+To create an image pointing to our Docker Hub repository, use the following command:
+
+```bash
+docker tag httpserver mandarina972310/modularization_with_virtualization_and_introduction_to_docker
+```
+
+Log in to Docker Hub and push the image using the following command:
+
+```bash
+docker login
+docker push andr3xdev/httpserver:latest 
+```
+
+![Image uploaded to Docker Hub](docs/hub.png)
+
+![Image uploaded to Docker Hub](docs/hub1.png)
+
+### AWS
+
+From the EC2 instance in AWS, install Docker with the following command:
+
+```bash
+sudo yum install docker
+```
+
+Start the Docker service with the following command:
+
+```bash
+sudo service docker start
+```
+
+If you don’t want to use `sudo` before every Docker command, you can create a user with permissions:
+
+```bash
+sudo usermod -a -G docker ec2-user
+```
+
+After running this command, you must log out of the SSH session and log back in.
+
+Download the image from our Docker Hub repository using the following command:
+
+```bash
+docker run -d -p 8080:6000 --name httpserver mandarina972310/modularization_with_virtualization_and_introduction_to_docker
+```
+
+![Docker download](docs/down.png)
+
+Before all, we need to enable the port assigned in the previous command (`8080:6000`) in the AWS security settings. To do this, add a new rule in the security group.
+
+![AWS Security Configuration](docs/security.png)
+
+
+Once the port is enabled, we can access the page at the following link:
+
+![Web Page](docs/web1.png)
+
+![Image 1](docs/web2.png)
+
+![Image 2](docs/web3.png)
+
+![api1](docs/q1.png)
+
+
+### DEPLOYMENT VIDEO
+
+<video width="" height="" controls autoplay>
+  <source src="images/consulta.mp4" type="video/mp4">
+</video>
