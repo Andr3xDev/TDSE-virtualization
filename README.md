@@ -154,7 +154,7 @@ Run the `docker-compose up -d` command after configuring the container network i
 To create an image pointing to our Docker Hub repository, use the following command:
 
 ```bash
-docker tag httpserver mandarina972310/modularization_with_virtualization_and_introduction_to_docker
+docker tag httpserver andr3xdev/httpserver
 ```
 
 Log in to Docker Hub and push the image using the following command:
@@ -193,7 +193,7 @@ After running this command, you must log out of the SSH session and log back in.
 Download the image from our Docker Hub repository using the following command:
 
 ```bash
-docker run -d -p 8080:6000 --name httpserver mandarina972310/modularization_with_virtualization_and_introduction_to_docker
+docker run -d -p 8080:6000 --name andr3xdev/httpserver
 ```
 
 ![Docker download](docs/down.png)
